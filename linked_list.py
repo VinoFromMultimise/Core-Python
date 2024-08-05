@@ -1,13 +1,13 @@
-# Appending to the list
-# Insert at a specific location
-# Printing and count of the nodes in a linked list
-# Delete from anywhere by mentioning either data, index or location
-# sort the linked list in a specific order
-# Find the extremities - Max and min node
-# Reversal of a linked list
-# Remove the duplicates from a linked list
-# Remove the nth occurance of a duplicate element in a linked list
-# Make an nth element to be present in an nth position
+# Appending to the list - completed
+# Insert at a specific location - completed
+# Printing and count of the nodes in a linked list - completed
+# Delete from anywhere by mentioning either data, index or location - completed
+# sort the linked list in a specific order - In progress
+# Find the extremities - Max and min node - completed
+# Reversal of a linked list - completed
+# Remove the duplicates from a linked list - In Progress
+# Remove the nth occurance of a duplicate element in a linked list - In progress
+# Make an nth element to be present in an nth position - In Progress
 
 class Node:
     def __init__(self, data):
@@ -61,15 +61,13 @@ class linkedlist:
                 temp = new_node
 
     def removal(self, data_part, link_part, logic = None):
-        link = None
-        self.del_items_list.append(data_part)
+        #self.del_items_list.append(data_part)
+        item = data_part
         link = link_part
         return link
     
     def removeNode(self, data_to_be_deleted = None, delete_at_index = None, delete_at_loc = None):
-        
         temp = self.head
-        
         if data_to_be_deleted != None:
             if data_to_be_deleted == temp.data:
                 self.head = self.removal(temp.data, temp.next)
@@ -77,6 +75,7 @@ class linkedlist:
                 while(temp):
                     if temp.data == data_to_be_deleted:
                         prev.next = self.removal(data_to_be_deleted, temp.next)
+                        break
                     else:
                         prev = temp
                         temp = temp.next
@@ -114,8 +113,21 @@ class linkedlist:
             current_node = current_node.next
             count += 1
         print("None")
-        print("\n Number of nodes in the linked list:", count)
+        #print("\n Number of nodes in the linked list:", count)
     
+    def removeDuplicates(self):
+        hit_lst = []
+        temp = self.head
+        while(temp):
+            hit_lst.append(temp.data)
+            temp = temp.next
+        act = linkedlist.removeDuplicatesInAList(hit_lst)
+        print("These are the duplicate elements to be removed:", act)
+        obj = linkedlist(self.head)
+        for i in act[:]:
+            obj.removeNode(data_to_be_deleted = i)
+        obj.printTheList()
+
     def reverseTheList(self):
         current = self.head
         next = prev = None
@@ -149,23 +161,36 @@ class linkedlist:
             t = t.next
         return min
     
+    @classmethod
+    def removeDuplicatesInAList(cls, lst):
+        b = []
+        lst.sort()
+        print("Original list:", lst)
+        length = len(lst[:])
+
+        for j in range(0, length):
+            temp = lst[j]
+            for i in range(j+1, length):
+                if temp == lst[i]:
+                    b.append(lst[i])
+        return b
     
 e1 = linkedlist()
 print("Appending into lists")
 e1.appendToTheList(100)
 e1.appendToTheList(20)
-e1.appendToTheList(3)
+e1.appendToTheList(40)
 e1.appendToTheList(40)
 e1.appendToTheList(-2)
+e1.appendToTheList(-2)
+e1.appendToTheList(100)
+e1.insertAtSpecificLoc(70, 1)
 e1.printTheList()
-print("Inserting at specific location")
-e1.insertAtSpecificLoc(40,1)
-e1.printTheList()
-print("Removing en element from the list")
-e1.removeNode(data_to_be_deleted = 40)
-e1.printTheList()
-print("The maximum node is :", e1.findMax())
-print("The minimum node is :", e1.findMin())
-print("Reversing the list")
-e1.reverseTheList()
+#print("The maximum node is :", e1.findMax())
+#print("The minimum node is :", e1.findMin())
+#print("Reversing the list")
+#e1.reverseTheList()
+print("Remove duplicates")
+e1.removeDuplicates()
+
 
