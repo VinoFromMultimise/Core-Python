@@ -115,7 +115,21 @@ class linkedlist:
             count += 1
         print("None")
         print("\n Number of nodes in the linked list:", count)
-
+    
+    def reverseTheList(self):
+        current = self.head
+        next = prev = None
+        while(current):
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        h = prev
+        while(h):
+            print("|",h.data, "|-->", end = '')
+            h = h.next
+        print("None")
+    
     def findMax(self):
         temp = self.head
         max = 0
@@ -135,6 +149,7 @@ class linkedlist:
             t = t.next
         return min
     
+    
 e1 = linkedlist()
 print("Appending into lists")
 e1.appendToTheList(100)
@@ -151,3 +166,6 @@ e1.removeNode(data_to_be_deleted = 40)
 e1.printTheList()
 print("The maximum node is :", e1.findMax())
 print("The minimum node is :", e1.findMin())
+print("Reversing the list")
+e1.reverseTheList()
+
