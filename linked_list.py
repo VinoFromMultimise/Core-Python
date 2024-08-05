@@ -5,7 +5,7 @@
 # sort the linked list in a specific order - In progress
 # Find the extremities - Max and min node - completed
 # Reversal of a linked list - completed
-# Remove the duplicates from a linked list - In Progress
+# Remove the duplicates from a linked list - completed
 # Remove the nth occurance of a duplicate element in a linked list - In progress
 # Make an nth element to be present in an nth position - In Progress
 
