@@ -2,12 +2,15 @@
 # Insert at a specific location - completed
 # Printing and count of the nodes in a linked list - completed
 # Delete from anywhere by mentioning either data, index or location - completed
-# sort the linked list in a specific order - In progress
+# sort the linked list in a specific order - completed
 # Find the extremities - Max and min node - completed
 # Reversal of a linked list - completed
 # Remove the duplicates from a linked list - completed
-# Remove the nth occurance of a duplicate element in a linked list - In progress
+# Remove the nth occurance of a duplicate element in a linked list - completed
 # Make an nth element to be present in an nth position - In Progress
+
+# This linked list's data part deals with 'int' and 'float' type of data only
+# Going further, I will update for 'str' type
 
 class Node:
     def __init__(self, data):
@@ -20,6 +23,9 @@ class linkedlist:
 
     def __init__(self, head = None):
         self.head = head
+    
+    def __repr__(self):
+        return self.head
 
     def appendToTheList(self, data):
         new_node = Node(data)
@@ -115,7 +121,19 @@ class linkedlist:
         print("None")
         #print("\n Number of nodes in the linked list:", count)
     
-    def removeDuplicates(self):
+    def removeDupAtNthPos(self, lst, ele = None, occurance = None):
+        occ_cnt, pos, freq = 0, 0, dict()
+        for i in lst:
+            if i == ele:
+                occ_cnt += 1
+                freq.update({(occ_cnt): [ele, pos]})
+            pos += 1
+        for key, val_list in freq.items():
+            if key == occurance:
+                ind = val_list[1]
+        return ind
+    
+    def removeDups(self):
         hit_lst = []
         temp = self.head
         while(temp):
@@ -128,6 +146,27 @@ class linkedlist:
             obj.removeNode(data_to_be_deleted = i)
         obj.printTheList()
 
+    def removeDuplicates(self):
+        print("Do you want to remove the duplicates entirely or pop the nth occurance of a particular element??")
+        print("1. Remove duplicates")
+        print("2. Remove an element's nth occurance")
+        print("Enter the option:")
+        opt = int(input(''))
+        obj = linkedlist(self.head)
+        lst = []
+        if opt == 1:
+            obj.removeDups()
+        else:
+            ele = int(input("ENter the elemnt to be deleted:"))
+            occurance = int(input("At which occurance you want it to be deleted:"))
+            temp = self.head
+            while(temp):
+                lst.append(temp.data)
+                temp = temp.next
+            ind = obj.removeDupAtNthPos(lst, ele = ele, occurance = occurance)
+            obj.removeNode(delete_at_index = ind)
+        obj.printTheList()
+        
     def reverseTheList(self):
         current = self.head
         next = prev = None
@@ -161,6 +200,25 @@ class linkedlist:
             t = t.next
         return min
     
+    def sortTheLinkedList(self, header_node):
+        temp = header_node
+        print("temp:", temp)
+        lst = []
+        while(temp):
+            lst.append(temp.data)
+            temp = temp.next
+        print("original list:", lst)
+        rev = linkedlist.sortList(lst)
+        return f"The sorted list is : {rev}"
+    
+    @classmethod
+    def sortList(cls, lst):
+        for i in range(len(lst)):
+            for j in range(i + 1, len(lst)):
+                if lst[i] >= lst[j]:
+                    lst[i], lst[j] = lst[j], lst[i]
+        return lst
+    
     @classmethod
     def removeDuplicatesInAList(cls, lst):
         b = []
@@ -192,5 +250,8 @@ e1.printTheList()
 #e1.reverseTheList()
 print("Remove duplicates")
 e1.removeDuplicates()
+head = e1.__repr__()
+print(e1.sortTheLinkedList(head))
+
 
 
