@@ -1,7 +1,7 @@
 from copy import copy
 from copy import deepcopy
 
-# List - Complete walkthrough
+# List - Complete walkthrough - fine to have one
 
 # creating the List
 x = 0
